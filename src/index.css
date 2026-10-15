@@ -1,0 +1,75 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --canvas-obsidian: #090A0D;
+    --surface-charcoal: #12141B;
+    --surface-elevated: #181B24;
+    --stone-border: rgba(255, 255, 255, 0.08);
+    --stone-travertine: #D8D2C4;
+    --stone-sand: #C5BCAB;
+    --stone-bronze: #A38F78;
+    --stone-carrara: #F8F7F4;
+    --stone-muted: #848B98;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--canvas-obsidian);
+    color: var(--stone-carrara);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    background-color: var(--canvas-obsidian);
+  }
+
+  ::selection {
+    background-color: var(--stone-bronze);
+    color: #000000;
+  }
+}
+
+/* Luxury Editorial Typography */
+.font-editorial {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+}
+
+.font-sans-clean {
+  font-family: 'Inter', -apple-system, sans-serif;
+}
+
+.font-mono-tech {
+  font-family: 'JetBrains Mono', monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Subtle architectural borders */
+.border-subtle {
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.border-subtle-hover:hover {
+  border-color: rgba(216, 210, 196, 0.35);
+}
+
+/* Micro Texture Inspection Zoom */
+.texture-lens {
+  background-size: 250%;
+  transition: background-position 0.15s ease-out;
+}
+
+/* Reduced motion accessibility */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
