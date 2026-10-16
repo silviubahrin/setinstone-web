@@ -2,32 +2,39 @@
 
 @layer base {
   :root {
-    --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-    --font-serif: 'Instrument Serif', Georgia, serif;
-    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    --bg-limestone: #EFECE6;
+    --bg-travertine: #E4DFD5;
+    --ink-basalt: #1C1B19;
+    --ink-mineral: #5C5852;
+    --seam: #D5CFC4;
+    --font-display: 'Cormorant Garamond', Georgia, serif;
+    --font-body: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
   }
 
   body {
-    font-family: var(--font-sans);
-    color: #161616;
-    background-color: #F9F8F5;
-    background-image: radial-gradient(rgba(22, 22, 22, 0.12) 1.2px, transparent 1.2px);
-    background-size: 24px 24px;
-    background-attachment: fixed;
+    background-color: var(--bg-limestone);
+    color: var(--ink-basalt);
+    font-family: var(--font-body);
     margin: 0;
     padding: 0;
     overflow-x: hidden;
   }
 
+  ::selection {
+    background-color: #1C1B19;
+    color: #EFECE6;
+  }
+
   h1, h2, h3 {
+    font-family: var(--font-display);
     text-wrap: balance;
   }
 }
 
-.font-serif-editorial {
-  font-family: var(--font-serif);
+.font-display {
+  font-family: var(--font-display);
 }
 
-.font-mono-tech {
-  font-family: var(--font-mono);
+.font-body {
+  font-family: var(--font-body);
 }
