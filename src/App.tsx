@@ -298,8 +298,8 @@ export function App() {
         </defs>
       </svg>
 
-      {/* ─── Header ─── */}
-      <header className="sticky top-0 z-50 bg-[#EFECE6]/95 backdrop-blur-sm border-b border-[#D5CFC4] px-6 sm:px-12 py-5">
+      {/* ─── Header (Desktop: Nav Bar Only | Mobile: Burger Only) ─── */}
+      <header className="sticky top-0 z-50 bg-[#EFECE6]/95 backdrop-blur-sm border-b border-[#D5CFC4] px-5 sm:px-12 py-3.5 sm:py-5">
         <div className="max-w-6xl mx-auto flex items-center justify-between">
           <button
             type="button"
@@ -309,15 +309,16 @@ export function App() {
             Set in Stone
           </button>
 
-          <div className="flex items-center gap-6 text-sm text-[#5C5852]">
-            <nav className="hidden md:flex items-center gap-6">
+          {/* Desktop Only: Nav Links + Phone CTA */}
+          <div className="hidden md:flex items-center gap-7 text-sm text-[#5C5852]">
+            <nav className="flex items-center gap-6">
               {NAV_ITEMS.map((item) => (
                 <button
                   key={item.id}
                   type="button"
                   onClick={() => navigate(item.id)}
                   className={`cursor-pointer transition-colors ${
-                    page === item.id && !menuOpen
+                    page === item.id
                       ? 'text-[#181715] font-medium underline underline-offset-8 decoration-[#9A7B4F]'
                       : 'hover:text-[#181715]'
                   }`}
@@ -329,49 +330,49 @@ export function App() {
 
             <a
               href="tel:+40740647532"
-              className="hidden sm:inline-block px-4 py-2 bg-[#181715] text-[#EFECE6] text-sm font-medium hover:bg-[#2E2C28] transition-colors"
+              className="px-4 py-2 bg-[#181715] text-[#EFECE6] text-sm font-medium hover:bg-[#2E2C28] transition-colors"
             >
               0740 647 532
             </a>
-
-            {/* Minimal 2-Line Burger Toggle */}
-            <button
-              type="button"
-              onClick={() => setMenuOpen((prev) => !prev)}
-              aria-expanded={menuOpen}
-              aria-label={menuOpen ? 'Închide meniul' : 'Deschide meniul'}
-              className="flex items-center gap-2.5 px-3 py-2 border border-[#D5CFC4] hover:border-[#181715] text-[#181715] transition-colors cursor-pointer"
-            >
-              <span className="text-xs font-medium tracking-wide">
-                {menuOpen ? 'Închide' : 'Meniu'}
-              </span>
-              <span className="w-4 h-2.5 flex flex-col justify-between">
-                <span
-                  className={`block h-[1.5px] bg-[#181715] transition-transform duration-300 ${
-                    menuOpen ? 'translate-y-[4px] rotate-45' : ''
-                  }`}
-                />
-                <span
-                  className={`block h-[1.5px] bg-[#181715] transition-transform duration-300 ${
-                    menuOpen ? '-translate-y-[4px] -rotate-45' : ''
-                  }`}
-                />
-              </span>
-            </button>
           </div>
+
+          {/* Mobile Only: Minimal 2-Line Burger Toggle */}
+          <button
+            type="button"
+            onClick={() => setMenuOpen((prev) => !prev)}
+            aria-expanded={menuOpen}
+            aria-label={menuOpen ? 'Închide meniul' : 'Deschide meniul'}
+            className="flex md:hidden items-center gap-2.5 px-3 py-2 border border-[#D5CFC4] hover:border-[#181715] text-[#181715] transition-colors cursor-pointer"
+          >
+            <span className="text-xs font-medium tracking-wide">
+              {menuOpen ? 'Închide' : 'Meniu'}
+            </span>
+            <span className="w-4 h-2.5 flex flex-col justify-between">
+              <span
+                className={`block h-[1.5px] bg-[#181715] transition-transform duration-300 ${
+                  menuOpen ? 'translate-y-[4px] rotate-45' : ''
+                }`}
+              />
+              <span
+                className={`block h-[1.5px] bg-[#181715] transition-transform duration-300 ${
+                  menuOpen ? '-translate-y-[4px] -rotate-45' : ''
+                }`}
+              />
+            </span>
+          </button>
         </div>
       </header>
 
-      {/* ─── Ultra-Concise Burger Menu Overlay ─── */}
+      {/* ─── Mobile Burger Menu Overlay ─── */}
       {menuOpen && (
         <div
           role="dialog"
           aria-modal="true"
           aria-label="Meniu"
-          className="fixed inset-0 z-40 bg-[#181715] text-[#EFECE6] pt-28 pb-10 px-6 sm:px-12 flex flex-col justify-between"
+          className="fixed inset-0 z-40 md:hidden bg-[#181715] text-[#EFECE6] pt-24 pb-10 px-6 flex flex-col justify-between"
         >
           <div className="max-w-6xl w-full mx-auto my-auto">
-            <nav className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 sm:gap-y-6 gap-x-16 border-y border-[#EFECE6]/15 py-10">
+            <nav className="grid grid-cols-1 gap-y-4 border-y border-[#EFECE6]/15 py-8">
               {NAV_ITEMS.map((item) => {
                 const isActive = page === item.id;
                 return (
@@ -379,8 +380,8 @@ export function App() {
                     key={item.id}
                     type="button"
                     onClick={() => navigate(item.id)}
-                    className={`font-display text-4xl sm:text-5xl text-left py-1 transition-all duration-200 cursor-pointer hover:translate-x-2 ${
-                      isActive ? 'text-[#C4A474]' : 'text-[#EFECE6] hover:text-[#C4A474]'
+                    className={`font-display text-4xl text-left py-1 transition-all duration-200 cursor-pointer ${
+                      isActive ? 'text-[#C4A474]' : 'text-[#EFECE6]'
                     }`}
                   >
                     {item.label}
@@ -390,17 +391,17 @@ export function App() {
             </nav>
           </div>
 
-          <div className="max-w-6xl w-full mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-sm text-[#A39E93]">
-            <span>Str. Dumitru Georgescu-Kiriac 60–62, Cluj-Napoca</span>
-            <div className="flex items-center gap-6">
-              <a href="tel:+40740647532" className="text-[#EFECE6] hover:text-[#C4A474] transition-colors">
+          <div className="max-w-6xl w-full mx-auto flex items-center justify-between gap-4 text-sm text-[#A39E93]">
+            <span>Cluj-Napoca</span>
+            <div className="flex items-center gap-5">
+              <a href="tel:+40740647532" className="text-[#EFECE6] font-medium">
                 0740 647 532
               </a>
               <a
                 href="https://wa.me/40740647532"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-[#EFECE6] transition-colors"
+                className="text-[#C4A474]"
               >
                 WhatsApp
               </a>
@@ -411,52 +412,44 @@ export function App() {
 
       <main className="flex-1">
         {/* =========================================================
-            1. ACASĂ (Exact clean Hero slabs + concise ledger)
+            1. ACASĂ (Zero-scroll mobile viewport + Full-size Stone Slabs)
            ========================================================= */}
         {page === 'acasa' && (
           <>
-            <section className="relative px-6 sm:px-12 py-12 sm:py-22 border-b border-[#D5CFC4] overflow-hidden">
+            <section className="relative px-5 sm:px-12 pt-5 pb-7 sm:py-20 border-b border-[#D5CFC4] overflow-hidden">
               <BookmatchVeins />
 
-              <div className="relative z-10 max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-center">
+              <div className="relative z-10 max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-center">
                 {/* Left Column: Statement & Clean Call to Action */}
-                <div className="lg:col-span-6 space-y-6 animate-monolith-1">
-                  <div className="inline-flex items-center gap-2.5 text-sm text-[#5C5852]">
-                    <span className="relative flex h-2 w-2">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#9A7B4F] opacity-60" />
-                      <span className="relative inline-flex rounded-full h-2 w-2 bg-[#9A7B4F]" />
-                    </span>
-                    <span>Atelier de prelucrare și montaj în Cluj-Napoca</span>
-                  </div>
-
-                  <h1 className="font-display text-4xl sm:text-6xl lg:text-[66px] font-normal leading-[1.04] text-[#181715]">
+                <div className="lg:col-span-6 space-y-3.5 sm:space-y-6 animate-monolith-1">
+                  <h1 className="font-display text-[36px] sm:text-6xl lg:text-[66px] font-normal leading-[1.04] text-[#181715]">
                     Piatră naturală tăiată la cotă și montată curat.
                   </h1>
 
-                  <p className="text-base sm:text-lg text-[#5C5852] leading-relaxed max-w-lg">
+                  <p className="text-sm sm:text-lg text-[#5C5852] leading-snug sm:leading-relaxed max-w-lg">
                     Executăm blaturi de bucătărie, scări, glafuri și garduri modulare din lastre de marmură, granit, travertin și cuarțit.
                   </p>
 
-                  {/* Clean Hero Call to Action */}
-                  <div className="pt-2 flex flex-wrap items-center gap-3.5">
+                  {/* Clean Hero Call to Action (Side-by-side on mobile, inline on desktop) */}
+                  <div className="pt-1 sm:pt-2 grid grid-cols-2 sm:flex sm:flex-wrap items-center gap-2.5 sm:gap-3.5">
                     <a
                       href="tel:+40740647532"
-                      className="px-7 py-4 bg-[#181715] text-[#EFECE6] text-sm font-medium transition-all shadow-[0_10px_28px_-10px_rgba(24,23,21,0.45)] hover:bg-[#2E2C28]"
+                      className="px-4 sm:px-7 py-3.5 sm:py-4 bg-[#181715] text-[#EFECE6] text-xs sm:text-sm font-medium text-center transition-all shadow-[0_10px_28px_-10px_rgba(24,23,21,0.45)] hover:bg-[#2E2C28]"
                     >
-                      Sună la atelier: 0740 647 532
+                      Sună: 0740 647 532
                     </a>
 
                     <button
                       type="button"
                       onClick={() => navigate('produse')}
-                      className="px-7 py-4 border border-[#181715] bg-[#EFECE6] text-[#181715] text-sm font-medium hover:bg-[#E4DFD5] transition-colors cursor-pointer"
+                      className="px-4 sm:px-7 py-3.5 sm:py-4 border border-[#181715] bg-[#EFECE6] text-[#181715] text-xs sm:text-sm font-medium text-center hover:bg-[#E4DFD5] transition-colors cursor-pointer"
                     >
                       Vezi lastrele
                     </button>
                   </div>
                 </div>
 
-                {/* Right Column: Kinetic Expanding Stone Slabs */}
+                {/* Right Column: Full-Size Kinetic Expanding Stone Slabs */}
                 <div
                   className="lg:col-span-6"
                   onMouseEnter={() => setIsPaused(true)}
