@@ -4,8 +4,9 @@
   :root {
     --bg-limestone: #EFECE6;
     --bg-travertine: #E4DFD5;
-    --ink-basalt: #1C1B19;
+    --ink-basalt: #181715;
     --ink-mineral: #5C5852;
+    --brass-accent: #9A7B4F;
     --seam: #D5CFC4;
     --font-display: 'Cormorant Garamond', Georgia, serif;
     --font-body: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -21,7 +22,7 @@
   }
 
   ::selection {
-    background-color: #1C1B19;
+    background-color: #181715;
     color: #EFECE6;
   }
 
@@ -37,4 +38,101 @@
 
 .font-body {
   font-family: var(--font-body);
+}
+
+/* Weighted architectural easing */
+.slab-transition {
+  transition: flex 750ms cubic-bezier(0.22, 1, 0.36, 1),
+              border-color 400ms ease,
+              box-shadow 500ms ease,
+              transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Discrete raking sunlight sheen across stone slab */
+@keyframes rakingLight {
+  0% {
+    transform: translateX(-120%) skewX(-18deg);
+    opacity: 0;
+  }
+  30% {
+    opacity: 0.45;
+  }
+  70% {
+    opacity: 0.45;
+  }
+  100% {
+    transform: translateX(220%) skewX(-18deg);
+    opacity: 0;
+  }
+}
+
+.animate-raking-light {
+  animation: rakingLight 7s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+/* Timer hairline sweep */
+@keyframes progressSweep {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.animate-slab-progress {
+  transform-origin: left center;
+  animation: progressSweep 4.8s linear forwards;
+}
+
+/* Orchestrated initial monolith rise */
+@keyframes monolithRise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-monolith-1 {
+  animation: monolithRise 800ms cubic-bezier(0.16, 1, 0.3, 1) 50ms both;
+}
+.animate-monolith-2 {
+  animation: monolithRise 800ms cubic-bezier(0.16, 1, 0.3, 1) 140ms both;
+}
+.animate-monolith-3 {
+  animation: monolithRise 800ms cubic-bezier(0.16, 1, 0.3, 1) 230ms both;
+}
+.animate-monolith-4 {
+  animation: monolithRise 800ms cubic-bezier(0.16, 1, 0.3, 1) 320ms both;
+}
+
+/* Dimension line draw */
+@keyframes drawLine {
+  from {
+    stroke-dashoffset: 120;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.animate-draw-line {
+  stroke-dasharray: 120;
+  animation: drawLine 650ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-raking-light,
+  .animate-slab-progress,
+  .animate-monolith-1,
+  .animate-monolith-2,
+  .animate-monolith-3,
+  .animate-monolith-4,
+  .animate-draw-line {
+    animation: none !important;
+  }
 }
