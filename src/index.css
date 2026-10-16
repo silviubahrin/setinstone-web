@@ -3,10 +3,11 @@
 @layer base {
   :root {
     --bg-limestone: #EFECE6;
+    --bg-alabaster: #FBF4EF;
     --bg-travertine: #E4DFD5;
-    --ink-basalt: #181715;
-    --ink-mineral: #5C5852;
-    --brass-accent: #9A7B4F;
+    --ink-basalt: #15100A;
+    --ink-mineral: #5E5D5C;
+    --brass-accent: #C4A07A;
     --seam: #D5CFC4;
     --font-display: 'Cormorant Garamond', Georgia, serif;
     --font-body: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -22,8 +23,8 @@
   }
 
   ::selection {
-    background-color: #181715;
-    color: #EFECE6;
+    background-color: #15100A;
+    color: #FBF4EF;
   }
 
   h1, h2, h3 {
@@ -40,7 +41,7 @@
   font-family: var(--font-body);
 }
 
-/* Weighted architectural easing */
+/* Weighted architectural slab easing */
 .slab-transition {
   transition: flex 750ms cubic-bezier(0.22, 1, 0.36, 1),
               border-color 400ms ease,
@@ -125,6 +126,92 @@
   animation: drawLine 650ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
+/* Rotating Consultation Seal */
+@keyframes sealSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-seal-spin {
+  transform-origin: 100px 100px;
+  animation: sealSpin 18s linear infinite;
+}
+
+/* CNC Waterjet Vector Path Choreography */
+@keyframes cncCutPath {
+  0% {
+    stroke-dasharray: 620;
+    stroke-dashoffset: 620;
+  }
+  50% {
+    stroke-dasharray: 620;
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dasharray: 620;
+    stroke-dashoffset: 0;
+  }
+}
+
+.animate-cnc-cut {
+  animation: cncCutPath 6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes laserSweep {
+  0% {
+    transform: translateX(0px);
+    opacity: 0.2;
+  }
+  15% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(350px);
+    opacity: 0.2;
+  }
+}
+
+.animate-laser-sweep {
+  animation: laserSweep 6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+/* Horizontal Stone Marquee */
+@keyframes stoneMarquee {
+  from {
+    transform: translateX(0%);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-stone-marquee {
+  animation: stoneMarquee 32s linear infinite;
+}
+
+/* Hamburger Monolith Curtain Open */
+@keyframes curtainOpen {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-curtain-open {
+  animation: curtainOpen 350ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-raking-light,
   .animate-slab-progress,
@@ -132,7 +219,12 @@
   .animate-monolith-2,
   .animate-monolith-3,
   .animate-monolith-4,
-  .animate-draw-line {
+  .animate-draw-line,
+  .animate-seal-spin,
+  .animate-cnc-cut,
+  .animate-laser-sweep,
+  .animate-stone-marquee,
+  .animate-curtain-open {
     animation: none !important;
   }
 }
