@@ -336,76 +336,87 @@ export function App() {
             </a>
           </div>
 
-          {/* Mobile Only: Minimal 2-Line Burger Toggle */}
+          {/* Mobile Only: Clean Light-Theme Burger Icon */}
           <button
             type="button"
             onClick={() => setMenuOpen((prev) => !prev)}
             aria-expanded={menuOpen}
             aria-label={menuOpen ? 'Închide meniul' : 'Deschide meniul'}
-            className="flex md:hidden items-center gap-2.5 px-3 py-2 border border-[#D5CFC4] hover:border-[#181715] text-[#181715] transition-colors cursor-pointer"
+            className="flex md:hidden w-9 h-9 flex-col items-end justify-center gap-1.5 text-[#181715] cursor-pointer"
           >
-            <span className="text-xs font-medium tracking-wide">
-              {menuOpen ? 'Închide' : 'Meniu'}
-            </span>
-            <span className="w-4 h-2.5 flex flex-col justify-between">
-              <span
-                className={`block h-[1.5px] bg-[#181715] transition-transform duration-300 ${
-                  menuOpen ? 'translate-y-[4px] rotate-45' : ''
-                }`}
-              />
-              <span
-                className={`block h-[1.5px] bg-[#181715] transition-transform duration-300 ${
-                  menuOpen ? '-translate-y-[4px] -rotate-45' : ''
-                }`}
-              />
-            </span>
+            <span
+              className={`block h-[1.5px] bg-[#181715] transition-all duration-300 ${
+                menuOpen ? 'w-6 translate-y-[3.75px] rotate-45' : 'w-6'
+              }`}
+            />
+            <span
+              className={`block h-[1.5px] bg-[#181715] transition-all duration-300 ${
+                menuOpen ? 'w-6 -translate-y-[3.75px] -rotate-45' : 'w-4'
+              }`}
+            />
           </button>
         </div>
       </header>
 
-      {/* ─── Mobile Burger Menu Overlay ─── */}
+      {/* ─── Light-Theme Mobile Burger Menu (Correctly Arranged Under Header) ─── */}
       {menuOpen && (
         <div
           role="dialog"
           aria-modal="true"
           aria-label="Meniu"
-          className="fixed inset-0 z-40 md:hidden bg-[#181715] text-[#EFECE6] pt-24 pb-10 px-6 flex flex-col justify-between"
+          className="fixed inset-x-0 top-[57px] bottom-0 z-40 md:hidden bg-[#EFECE6] text-[#181715] px-5 pt-2 pb-8 flex flex-col justify-between overflow-y-auto"
         >
-          <div className="max-w-6xl w-full mx-auto my-auto">
-            <nav className="grid grid-cols-1 gap-y-4 border-y border-[#EFECE6]/15 py-8">
-              {NAV_ITEMS.map((item) => {
-                const isActive = page === item.id;
-                return (
-                  <button
-                    key={item.id}
-                    type="button"
-                    onClick={() => navigate(item.id)}
-                    className={`font-display text-4xl text-left py-1 transition-all duration-200 cursor-pointer ${
-                      isActive ? 'text-[#C4A474]' : 'text-[#EFECE6]'
+          <BookmatchVeins />
+
+          <nav className="relative z-10 divide-y divide-[#D5CFC4] border-b border-[#D5CFC4]">
+            {NAV_ITEMS.map((item) => {
+              const isActive = page === item.id;
+              return (
+                <button
+                  key={item.id}
+                  type="button"
+                  onClick={() => navigate(item.id)}
+                  className="w-full py-4 flex items-center justify-between text-left cursor-pointer group"
+                >
+                  <span
+                    className={`font-display text-3xl transition-colors ${
+                      isActive ? 'text-[#181715] font-medium' : 'text-[#5C5852] group-hover:text-[#181715]'
                     }`}
                   >
                     {item.label}
-                  </button>
-                );
-              })}
-            </nav>
-          </div>
+                  </span>
+                  <span
+                    className={`text-xs ${
+                      isActive ? 'text-[#9A7B4F] font-medium' : 'text-[#9A7B4F]/60'
+                    }`}
+                  >
+                    {isActive ? '•' : '→'}
+                  </span>
+                </button>
+              );
+            })}
+          </nav>
 
-          <div className="max-w-6xl w-full mx-auto flex items-center justify-between gap-4 text-sm text-[#A39E93]">
-            <span>Cluj-Napoca</span>
-            <div className="flex items-center gap-5">
-              <a href="tel:+40740647532" className="text-[#EFECE6] font-medium">
-                0740 647 532
+          <div className="relative z-10 space-y-3 pt-6">
+            <div className="grid grid-cols-2 gap-2.5">
+              <a
+                href="tel:+40740647532"
+                className="py-3.5 bg-[#181715] text-[#EFECE6] text-xs font-medium text-center"
+              >
+                Sună: 0740 647 532
               </a>
               <a
                 href="https://wa.me/40740647532"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[#C4A474]"
+                className="py-3.5 border border-[#181715] bg-[#EFECE6] text-[#181715] text-xs font-medium text-center"
               >
                 WhatsApp
               </a>
             </div>
+            <p className="text-xs text-[#5C5852] text-center">
+              Str. Dumitru Georgescu-Kiriac 60–62, Cluj-Napoca
+            </p>
           </div>
         </div>
       )}
